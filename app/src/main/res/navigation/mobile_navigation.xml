@@ -22,4 +22,9 @@
         android:name="com.osandoval.mitoproducts.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_products"
+        android:name="com.osandoval.mitoproducts.ui.products.fragments.ProductsFragment"
+        android:label="@string/menu_products"
+        tools:layout="@layout/fragment_products" />
 </navigation>
