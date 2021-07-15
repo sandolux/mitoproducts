@@ -1,8 +1,8 @@
 package com.osandoval.mitoproducts.domain.product
 
-import android.util.Log
 import com.osandoval.mitoproducts.data.local.LocalProductDataSource
 import com.osandoval.mitoproducts.data.model.ProductEntity
+import com.osandoval.mitoproducts.data.model.ShoppingCartEntity
 import com.osandoval.mitoproducts.data.model.toProductEntity
 import com.osandoval.mitoproducts.data.remote.RemoteProductDataSource
 
@@ -18,4 +18,9 @@ class ProductRepository(private val remoteDataSource: RemoteProductDataSource,
 
         return localDataSource.getProducts()
     }
+
+    override suspend fun getProduct(id: Int): ProductEntity = localDataSource.getProduct(id)
+
+    override suspend fun addShoppingCart(shoppingCart: ShoppingCartEntity) = localDataSource.addShoppingCart(shoppingCart)
+
 }

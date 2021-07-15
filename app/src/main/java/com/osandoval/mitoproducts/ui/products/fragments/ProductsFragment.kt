@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
@@ -54,6 +55,7 @@ class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IO
     }
 
     override fun onItemClick(product: ProductEntity) {
-        Log.d(TAG, "onItemClick:$product")
+       val action = ProductsFragmentDirections.actionNavProductsToProductDetailFragment(product.id)
+        findNavController().navigate(action)
     }
 }

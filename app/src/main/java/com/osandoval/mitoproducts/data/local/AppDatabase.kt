@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.osandoval.mitoproducts.data.model.ProductEntity
+import com.osandoval.mitoproducts.data.model.ShoppingCartEntity
 
-@Database(entities = [ProductEntity::class], version=1)
+@Database(entities = [ProductEntity::class, ShoppingCartEntity::class], version=2)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun productDao(): IProductDao
+    abstract fun shoppingCartDao() : IShoppingCartDao
 
     companion object{
         private var INSTANCE: AppDatabase? = null
@@ -16,7 +18,7 @@ abstract class AppDatabase: RoomDatabase() {
             INSTANCE = INSTANCE ?: Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,
-                "product_table"
+                "product_table,shoppingCart_table"
             ).build()
 
             return INSTANCE!!
