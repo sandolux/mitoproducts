@@ -3,13 +3,14 @@ package com.osandoval.mitoproducts.ui.shoppingcart.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.domain.shoppingcart.ShoppingCartRepository
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
 class ShoppingCartViewModel(private val repository: ShoppingCartRepository) : ViewModel() {
-    fun getShoppingCart() = liveData(Dispatchers.IO){
+    fun getShoppingCart() = liveData(viewModelScope.coroutineContext + Dispatchers.Main){
         emit(Resource.Loading())
         try {
             emit(Resource.Success(repository.getShoppingCart()))

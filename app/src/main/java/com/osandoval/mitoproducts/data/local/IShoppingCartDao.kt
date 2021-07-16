@@ -7,7 +7,7 @@ import com.osandoval.mitoproducts.data.model.ShoppingCartEntity
 @Dao
 interface IShoppingCartDao {
     @Query("SELECT * FROM ShoppingCartEntity")
-    suspend fun getShoppingCart() : List<ShoppingCartEntity>
+    suspend fun getShoppingCart() : MutableList<ShoppingCartEntity>
 
     @Query("DELETE FROM ShoppingCartEntity WHERE uuid= :uid")
     suspend fun deleteItem(uid:Int)

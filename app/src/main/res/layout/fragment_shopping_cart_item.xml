@@ -31,9 +31,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:lines="2"
         android:textSize="14sp"
         android:textStyle="normal"
-        android:lines="2"
         app:layout_constraintStart_toStartOf="@+id/text_view_name"
         app:layout_constraintTop_toBottomOf="@+id/text_view_name"
         tools:text="Sierra circular para cortes bacanes" />
