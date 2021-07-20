@@ -1,4 +1,4 @@
-package com.osandoval.mitoproducts.data.local
+package com.osandoval.mitoproducts.data.local.product
 
 import androidx.room.Dao
 import androidx.room.Insert

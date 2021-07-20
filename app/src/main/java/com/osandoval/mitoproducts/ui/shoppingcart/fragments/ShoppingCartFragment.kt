@@ -5,13 +5,12 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.room.Delete
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.data.local.AppDatabase
-import com.osandoval.mitoproducts.data.local.LocalShoppingCartDataSource
+import com.osandoval.mitoproducts.data.local.shoppingCart.LocalShoppingCartDataSource
 import com.osandoval.mitoproducts.data.model.ShoppingCartEntity
 import com.osandoval.mitoproducts.databinding.FragmentShoppingCartBinding
 import com.osandoval.mitoproducts.domain.shoppingcart.ShoppingCartRepository
@@ -34,6 +33,12 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
 
         binding = FragmentShoppingCartBinding.bind(view)
 
+        setGetShoppingCartObserver()
+        setButtonCreateOrderListener()
+
+    }
+
+    private fun setGetShoppingCartObserver() {
         viewModel.getShoppingCart().observe(viewLifecycleOwner, {result ->
             when(result) {
                 is Resource.Loading -> {
@@ -49,6 +54,25 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
                 }
             }
         })
+    }
+
+    private fun setButtonCreateOrderListener() {
+        binding.buttonCreateOrder.setOnClickListener {
+            viewModel.insertOrders().observe(viewLifecycleOwner, {result ->
+                when(result) {
+                    is Resource.Loading -> {
+                        Log.d(TAG, "onViewCreated: LOADING...")
+                    }
+                    is Resource.Success -> {
+                        //Log.d(TAG, "setButtonCreateOrderListener: El pedido fue creado ${result.data}  ")
+                        findNavController().navigate(ShoppingCartFragmentDirections.actionNavShoppingCartToNavOrders())
+                    }
+                    is Resource.Failure -> {
+                        Log.d(TAG, "onViewCreated: ${result.exception}")
+                    }
+                }
+            })
+        }
     }
 
     override fun onItemClick(shoppingCart: ShoppingCartEntity) {

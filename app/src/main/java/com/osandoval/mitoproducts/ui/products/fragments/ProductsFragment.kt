@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.data.local.AppDatabase
-import com.osandoval.mitoproducts.data.local.LocalProductDataSource
+import com.osandoval.mitoproducts.data.local.product.LocalProductDataSource
 import com.osandoval.mitoproducts.data.model.ProductEntity
 import com.osandoval.mitoproducts.data.remote.RemoteProductDataSource
 import com.osandoval.mitoproducts.data.remote.RetrofitClient
@@ -38,7 +38,7 @@ class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IO
 
         binding = FragmentProductsBinding.bind(view)
 
-        viewModel.getProducts().observe(viewLifecycleOwner, {result->
+        viewModel.getProducts().observe(viewLifecycleOwner, { result->
             when(result) {
                 is Resource.Loading -> {
                     Log.d(TAG, "onViewCreated: LOADING...")

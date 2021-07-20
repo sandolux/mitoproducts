@@ -1,4 +1,4 @@
-package com.osandoval.mitoproducts.data.local
+package com.osandoval.mitoproducts.data.local.product
 
 import com.osandoval.mitoproducts.data.model.ProductEntity
 import com.osandoval.mitoproducts.data.model.ShoppingCartEntity

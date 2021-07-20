@@ -3,25 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_home">
+    app:startDestination="@id/nav_products">
 
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="com.osandoval.mitoproducts.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.osandoval.mitoproducts.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.osandoval.mitoproducts.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+<!--    <fragment-->
+<!--        android:id="@+id/nav_home"-->
+<!--        android:name="com.osandoval.mitoproducts.ui.home.HomeFragment"-->
+<!--        android:label="@string/menu_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
 
     <fragment
         android:id="@+id/nav_products"
@@ -46,9 +34,34 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_orders"
+        android:name="com.osandoval.mitoproducts.ui.orders.fragments.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" >
+        <action
+            android:id="@+id/action_nav_orders_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/nav_shopping_cart"
         android:name="com.osandoval.mitoproducts.ui.shoppingcart.fragments.ShoppingCartFragment"
         android:label="fragment_shopping_cart"
-        tools:layout="@layout/fragment_shopping_cart" />
+        tools:layout="@layout/fragment_shopping_cart" >
+        <action
+            android:id="@+id/action_nav_shopping_cart_to_nav_orders"
+            app:destination="@id/nav_orders" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.osandoval.mitoproducts.ui.orders.fragments.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" >
+        <argument
+            android:name="uid"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

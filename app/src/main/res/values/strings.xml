@@ -16,4 +16,5 @@
     <string name="menu_shopping_cart">Shopping Cart</string>
 
     <string name="add_to_shopping_cart">Agrear al carrito</string>
+    <string name="menu_orders">Ordenes</string>
 </resources>
