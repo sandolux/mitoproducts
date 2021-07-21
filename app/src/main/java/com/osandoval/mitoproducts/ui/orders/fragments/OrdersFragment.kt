@@ -2,12 +2,14 @@ package com.osandoval.mitoproducts.ui.orders.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.data.local.AppDatabase
@@ -18,7 +20,7 @@ import com.osandoval.mitoproducts.domain.order.OrderRepository
 import com.osandoval.mitoproducts.ui.orders.adapter.OrdersAdapter
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderViewModel
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderViewModelFactory
-import com.osandoval.mitoproducts.ui.products.adapter.ProductAdapter
+import com.osandoval.mitoproducts.ui.products.fragments.ProductsFragmentDirections
 
 class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItemClickListener {
     private val TAG ="Meh"
@@ -34,6 +36,7 @@ class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItem
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOrdersBinding.bind(view)
+        setHasOptionsMenu(true)
 
         viewModel.getOrders().observe(viewLifecycleOwner, { result->
             when(result) {
@@ -57,8 +60,25 @@ class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItem
 
     override fun onNextButtonClick(uid: String) {
         Log.d(TAG, "onNextButtonClick: $uid")
-                                             // action_nav_orders_to_orderDetailFragment
         val action = OrdersFragmentDirections.actionNavOrdersToOrderDetailFragment(uid)
         findNavController().navigate(action)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return(when (item.itemId) {
+            R.id.action_shopping_cart -> {
+                findNavController().navigate(OrdersFragmentDirections.actionNavOrdersToNavShoppingCart())
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        })
+
     }
 }

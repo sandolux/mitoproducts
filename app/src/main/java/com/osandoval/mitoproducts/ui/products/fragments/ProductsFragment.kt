@@ -2,6 +2,9 @@ package com.osandoval.mitoproducts.ui.products.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,6 +40,7 @@ class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IO
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentProductsBinding.bind(view)
+        setHasOptionsMenu(true)
 
         viewModel.getProducts().observe(viewLifecycleOwner, { result->
             when(result) {
@@ -57,5 +61,23 @@ class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IO
     override fun onItemClick(product: ProductEntity) {
        val action = ProductsFragmentDirections.actionNavProductsToProductDetailFragment(product.id)
         findNavController().navigate(action)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return(when (item.itemId) {
+            R.id.action_shopping_cart -> {
+                findNavController().navigate(ProductsFragmentDirections.actionNavProductsToNavShoppingCart())
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        })
+
     }
 }

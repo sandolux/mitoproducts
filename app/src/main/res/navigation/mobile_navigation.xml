@@ -23,12 +23,15 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_products_to_nav_shopping_cart"
+            app:destination="@id/nav_shopping_cart" />
     </fragment>
 
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.osandoval.mitoproducts.ui.products.fragments.ProductDetailFragment"
-        android:label="fragment_product_detail"
+        android:label="Detalle del producto"
         tools:layout="@layout/fragment_product_detail" >
         <argument
             android:name="id"
@@ -38,17 +41,20 @@
     <fragment
         android:id="@+id/nav_orders"
         android:name="com.osandoval.mitoproducts.ui.orders.fragments.OrdersFragment"
-        android:label="fragment_orders"
+        android:label="Pedidos"
         tools:layout="@layout/fragment_orders" >
         <action
             android:id="@+id/action_nav_orders_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_nav_orders_to_nav_shopping_cart"
+            app:destination="@id/nav_shopping_cart" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_shopping_cart"
         android:name="com.osandoval.mitoproducts.ui.shoppingcart.fragments.ShoppingCartFragment"
-        android:label="fragment_shopping_cart"
+        android:label="Carro de compras"
         tools:layout="@layout/fragment_shopping_cart" >
         <action
             android:id="@+id/action_nav_shopping_cart_to_nav_orders"
@@ -57,7 +63,7 @@
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.osandoval.mitoproducts.ui.orders.fragments.OrderDetailFragment"
-        android:label="fragment_order_detail"
+        android:label="Detalle del pedido"
         tools:layout="@layout/fragment_order_detail" >
         <argument
             android:name="uid"
