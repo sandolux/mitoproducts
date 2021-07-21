@@ -25,13 +25,17 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_products_to_nav_shopping_cart"
-            app:destination="@id/nav_shopping_cart" />
+            app:destination="@id/nav_shopping_cart"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.osandoval.mitoproducts.ui.products.fragments.ProductDetailFragment"
-        android:label="Detalle del producto"
+        android:label="@string/str_label_product_detail_fragment"
         tools:layout="@layout/fragment_product_detail" >
         <argument
             android:name="id"
@@ -41,29 +45,41 @@
     <fragment
         android:id="@+id/nav_orders"
         android:name="com.osandoval.mitoproducts.ui.orders.fragments.OrdersFragment"
-        android:label="Pedidos"
+        android:label="@string/str_label_order_fragment"
         tools:layout="@layout/fragment_orders" >
         <action
             android:id="@+id/action_nav_orders_to_orderDetailFragment"
-            app:destination="@id/orderDetailFragment" />
+            app:destination="@id/orderDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_orders_to_nav_shopping_cart"
-            app:destination="@id/nav_shopping_cart" />
+            app:destination="@id/nav_shopping_cart"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_shopping_cart"
         android:name="com.osandoval.mitoproducts.ui.shoppingcart.fragments.ShoppingCartFragment"
-        android:label="Carro de compras"
+        android:label="@string/str_label_shopping_cart"
         tools:layout="@layout/fragment_shopping_cart" >
         <action
             android:id="@+id/action_nav_shopping_cart_to_nav_orders"
-            app:destination="@id/nav_orders" />
+            app:destination="@id/nav_orders"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.osandoval.mitoproducts.ui.orders.fragments.OrderDetailFragment"
-        android:label="Detalle del pedido"
+        android:label="@string/str_label_order_detail_fragment"
         tools:layout="@layout/fragment_order_detail" >
         <argument
             android:name="uid"
