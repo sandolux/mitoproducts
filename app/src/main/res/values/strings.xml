@@ -21,4 +21,11 @@
     <string name="str_label_shopping_cart">Carro de compras</string>
     <string name="add_to_shopping_cart">Agregar al carrito</string>
 
+    <!-- Login Screen   -->
+    <string name="str_label_username">Nombre de usuario</string>
+    <string name="str_label_password">Contraseña</string>
+    <string name="str_button_login">LOGIN</string>
+    <string name="str_button_facebook">Inicia sesión con Facebook</string>
+    <string name="str_label_not_account_yet">¿No tienes cuenta? Registrate aquí</string>
+    <string name="str_label_register_here">¿No tienes cuenta? Registrate </string>
 </resources>

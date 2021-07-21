@@ -20,7 +20,6 @@ import com.osandoval.mitoproducts.domain.order.OrderRepository
 import com.osandoval.mitoproducts.ui.orders.adapter.OrdersAdapter
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderViewModel
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderViewModelFactory
-import com.osandoval.mitoproducts.ui.products.fragments.ProductsFragmentDirections
 
 class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItemClickListener {
     private val TAG ="Meh"
