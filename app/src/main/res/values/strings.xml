@@ -27,5 +27,15 @@
     <string name="str_button_login">LOGIN</string>
     <string name="str_button_facebook">Inicia sesión con Facebook</string>
     <string name="str_label_not_account_yet">¿No tienes cuenta? Registrate aquí</string>
-    <string name="str_label_register_here">¿No tienes cuenta? Registrate </string>
+
+
+    <!--  REGISTER SCREEN  -->
+    <string name="str_label_name">Nombre</string>
+    <string name="str_label_lastname">Apellido</string>
+    <string name="str_label_address">Dirección</string>
+    <string name="str_label_email">e-mail</string>
+    <string name="str_label_password_confirm">Confirmar contraseña</string>
+    <string name="str_label_already_have_an_account">Si tienes una cuenta puedes ingresar aquí</string>
+    <string name="str_button_register">REGISTRARSE</string>
+
 </resources>
