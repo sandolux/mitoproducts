@@ -15,7 +15,7 @@ import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.data.local.AppDatabase
 import com.osandoval.mitoproducts.data.local.product.LocalProductDataSource
 import com.osandoval.mitoproducts.data.model.ProductEntity
-import com.osandoval.mitoproducts.data.remote.RemoteProductDataSource
+import com.osandoval.mitoproducts.data.remote.product.RemoteProductDataSource
 import com.osandoval.mitoproducts.data.remote.RetrofitClient
 import com.osandoval.mitoproducts.databinding.FragmentProductsBinding
 import com.osandoval.mitoproducts.domain.product.ProductRepository

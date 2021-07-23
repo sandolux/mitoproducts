@@ -1,11 +1,10 @@
 package com.osandoval.mitoproducts.data.remote
 
 import com.osandoval.mitoproducts.data.model.Response
+import com.osandoval.mitoproducts.data.model.User
 import com.osandoval.mitoproducts.data.model.UserResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import com.osandoval.mitoproducts.data.model.UserSignUp
+import retrofit2.http.*
 
 interface IWebService {
     @GET("product")
@@ -15,4 +14,7 @@ interface IWebService {
     @FormUrlEncoded
     suspend fun validateUser(@Field("username") username: String,
                              @Field("password") password: String) : UserResponse
+
+    @POST("user")
+    suspend fun signUp(@Body request: UserSignUp) : UserResponse
 }

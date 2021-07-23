@@ -7,12 +7,23 @@ data class UserResponse (
 )
 
 data class User (
-    val id: Long,
+    val id: Long?=0,
+    val user: String,
     val name: String,
     val lastName: String,
-    val user: String,
-    val password: String,
-    val email: String,
     val address: String,
-    val phone: String
+    val phone: String,
+    val email: String,
+    val password: String,
+)
+
+data class UserSignUp (
+    val id: Long?=0,
+    val username: String,
+    val name: String,
+    val lastName: String,
+    val address: String,
+    val phone: String,
+    val email: String,
+    val password: String,
 )

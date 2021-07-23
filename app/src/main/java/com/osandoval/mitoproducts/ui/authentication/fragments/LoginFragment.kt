@@ -7,18 +7,15 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.osandoval.mitoproducts.MainActivity
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
-import com.osandoval.mitoproducts.data.local.AppDatabase
-import com.osandoval.mitoproducts.data.remote.RemoteLoginDataSource
+import com.osandoval.mitoproducts.data.remote.authentication.RemoteLoginDataSource
 import com.osandoval.mitoproducts.data.remote.RetrofitClient
 import com.osandoval.mitoproducts.databinding.FragmentLoginBinding
 import com.osandoval.mitoproducts.domain.login.LoginRepository
 import com.osandoval.mitoproducts.ui.authentication.viewmodel.LoginViewModel
 import com.osandoval.mitoproducts.ui.authentication.viewmodel.LoginViewModelFactory
-import com.osandoval.mitoproducts.ui.products.adapter.ProductAdapter
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private val TAG ="Meh"

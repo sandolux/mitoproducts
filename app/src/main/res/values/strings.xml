@@ -26,16 +26,16 @@
     <string name="str_label_password">Contraseña</string>
     <string name="str_button_login">LOGIN</string>
     <string name="str_button_facebook">Inicia sesión con Facebook</string>
-    <string name="str_label_not_account_yet">¿No tienes cuenta? Registrate aquí</string>
-
+    <string name="str_label_not_account_yet"><u>¿No tienes cuenta? Registrate aquí</u></string>
 
     <!--  REGISTER SCREEN  -->
     <string name="str_label_name">Nombre</string>
     <string name="str_label_lastname">Apellido</string>
     <string name="str_label_address">Dirección</string>
+    <string name="str_label_phone">Fono</string>
     <string name="str_label_email">e-mail</string>
     <string name="str_label_password_confirm">Confirmar contraseña</string>
-    <string name="str_label_already_have_an_account">Si tienes una cuenta puedes ingresar aquí</string>
+    <string name="str_label_already_have_an_account"><u>Si tienes una cuenta puedes ingresar aquí</u></string>
     <string name="str_button_register">REGISTRARSE</string>
 
 </resources>

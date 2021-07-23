@@ -1,7 +1,7 @@
-package com.osandoval.mitoproducts.data.remote
+package com.osandoval.mitoproducts.data.remote.authentication
 
-import android.util.Log
 import com.osandoval.mitoproducts.data.model.UserResponse
+import com.osandoval.mitoproducts.data.remote.IWebService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
