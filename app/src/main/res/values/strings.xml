@@ -13,6 +13,7 @@
     <string name="menu_products">Productos</string>
     <string name="menu_orders">Pedidos</string>
     <string name="menu_shopping_cart">Carro de compras</string>
+    <string name="menu_sign_out">Cerrar sesión</string>
 
     <!-- Mobile Navigation   -->
     <string name="str_label_product_detail_fragment">Detalle del producto</string>

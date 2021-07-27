@@ -18,7 +18,7 @@ class SharedPreferences(private val context: Context) : ISharedPreferences {
         return preferences.getString(KEY_USERNAME, "")
     }
 
-    override suspend fun wipeData() {
+    override fun wipeData() {
         val preferences = context.getSharedPreferences(APP_PRODUCTS, Context.MODE_PRIVATE).edit()
         preferences.clear()
         preferences.apply()

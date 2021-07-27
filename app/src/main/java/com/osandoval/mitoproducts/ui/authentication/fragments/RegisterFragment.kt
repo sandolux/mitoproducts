@@ -54,6 +54,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     }
                     is Resource.Success -> {
                         Log.d(TAG, "setRegisterButtonListener: $result")
+                        goToSignIn(username,password)
                     }
                     is Resource.Failure -> {
                         Log.d(TAG, "onViewCreated: ${result.exception}")
@@ -67,5 +68,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.textViewHaveAnAccount.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun goToSignIn(username: String, password: String){
+        val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment(username,password)
+        findNavController().navigate(action)
     }
 }

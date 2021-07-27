@@ -7,7 +7,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.osandoval.mitoproducts.MainActivity
+import androidx.navigation.fragment.navArgs
+import com.osandoval.mitoproducts.ui.main.activity.MainActivity
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.data.local.AppDatabase
@@ -22,6 +23,7 @@ import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private val TAG ="Meh"
+    private val args by navArgs<LoginFragmentArgs>()
     private lateinit var binding: FragmentLoginBinding
     private val viewModel by viewModels<LoginViewModel>{
         LoginViewModelFactory(
@@ -43,6 +45,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 goToMainActivity()
             }
             false -> {
+                if(args.username != "NO_DATA") {
+                    binding.textInputUsername.setText(args.username.toString())
+                    binding.textInputPassword.setText(args.password.toString())
+                }
                 setButtonLoginListener()
                 setUserRegisterListener()
             }
@@ -80,7 +86,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun goToMainActivity(){
-        startActivity(Intent(activity,MainActivity::class.java))
+        startActivity(Intent(activity, MainActivity::class.java))
     }
 
 }
