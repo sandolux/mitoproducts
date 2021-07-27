@@ -10,12 +10,15 @@ import androidx.navigation.fragment.findNavController
 import com.osandoval.mitoproducts.MainActivity
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
+import com.osandoval.mitoproducts.data.local.AppDatabase
+import com.osandoval.mitoproducts.data.local.authentication.login.LocalLoginDataSource
 import com.osandoval.mitoproducts.data.remote.authentication.RemoteLoginDataSource
 import com.osandoval.mitoproducts.data.remote.RetrofitClient
 import com.osandoval.mitoproducts.databinding.FragmentLoginBinding
-import com.osandoval.mitoproducts.domain.login.LoginRepository
+import com.osandoval.mitoproducts.domain.authentication.login.LoginRepository
 import com.osandoval.mitoproducts.ui.authentication.viewmodel.LoginViewModel
 import com.osandoval.mitoproducts.ui.authentication.viewmodel.LoginViewModelFactory
+import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private val TAG ="Meh"
@@ -23,8 +26,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private val viewModel by viewModels<LoginViewModel>{
         LoginViewModelFactory(
             LoginRepository(
+                LocalLoginDataSource(AppDatabase.getDatabase(requireContext()).loginDao()),
                 RemoteLoginDataSource(RetrofitClient.webService)
-            )
+            ),
+            SharedPreferences(requireContext())
         )
     }
 
@@ -33,8 +38,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         
         binding = FragmentLoginBinding.bind(view)
 
-        setButtonLoginListener()
-        setUserRegisterListener()
+        when(viewModel.findUser()){
+            true -> {
+                goToMainActivity()
+            }
+            false -> {
+                setButtonLoginListener()
+                setUserRegisterListener()
+            }
+        }
     }
 
     private fun setUserRegisterListener() {
@@ -55,12 +67,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     }
                     is Resource.Success -> {
                         when(result.data) {
-                            true -> {
-                                startActivity(Intent(activity,MainActivity::class.java))
-                            }
-                            false ->{
-                                Log.d(TAG, "onViewCreated: error de credenciales")
-                            }
+                            true -> { goToMainActivity() }
+                            false ->{ Log.d(TAG, "onViewCreated: error de credenciales") }
                         }
                     }
                     is Resource.Failure -> {
@@ -69,6 +77,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }
             })
         }
+    }
+
+    private fun goToMainActivity(){
+        startActivity(Intent(activity,MainActivity::class.java))
     }
 
 }

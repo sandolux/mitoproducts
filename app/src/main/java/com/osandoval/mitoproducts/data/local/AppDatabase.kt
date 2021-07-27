@@ -4,18 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.osandoval.mitoproducts.data.local.authentication.login.ILoginDao
+import com.osandoval.mitoproducts.data.local.authentication.signup.ISignUpDao
 import com.osandoval.mitoproducts.data.local.order.IOrderDao
 import com.osandoval.mitoproducts.data.local.product.IProductDao
 import com.osandoval.mitoproducts.data.local.shoppingCart.IShoppingCartDao
-import com.osandoval.mitoproducts.data.model.OrderDetailEntity
-import com.osandoval.mitoproducts.data.model.OrderEntity
-import com.osandoval.mitoproducts.data.model.ProductEntity
-import com.osandoval.mitoproducts.data.model.ShoppingCartEntity
+import com.osandoval.mitoproducts.data.model.*
 
 @Database(entities = [
                       ProductEntity::class,
                       ShoppingCartEntity::class,
-                      OrderEntity::class, OrderDetailEntity::class
+                      OrderEntity::class,
+                      OrderDetailEntity::class,
+                      UserEntity::class
                      ],
           version=4,
           exportSchema = false)
@@ -24,6 +25,8 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun productDao(): IProductDao
     abstract fun shoppingCartDao() : IShoppingCartDao
     abstract fun orderDao() : IOrderDao
+    abstract fun loginDao() : ILoginDao
+    abstract fun signUpDao() : ISignUpDao
 
     companion object{
         private var INSTANCE: AppDatabase? = null

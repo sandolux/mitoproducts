@@ -6,16 +6,16 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
+import com.osandoval.mitoproducts.data.local.AppDatabase
+import com.osandoval.mitoproducts.data.local.authentication.signup.LocalSignUpDataSource
 import com.osandoval.mitoproducts.data.remote.RetrofitClient
 import com.osandoval.mitoproducts.data.remote.authentication.RemoteSignUpDataSource
 import com.osandoval.mitoproducts.databinding.FragmentRegisterBinding
-import com.osandoval.mitoproducts.domain.signUp.SignUpRepository
+import com.osandoval.mitoproducts.domain.authentication.signUp.SignUpRepository
 import com.osandoval.mitoproducts.ui.authentication.viewmodel.RegisterViewModel
 import com.osandoval.mitoproducts.ui.authentication.viewmodel.RegisterViewModelFactory
-import com.osandoval.mitoproducts.ui.orders.adapter.OrdersAdapter
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private val TAG ="meh"
@@ -23,6 +23,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     private val viewModel by viewModels<RegisterViewModel>{
         RegisterViewModelFactory(
             SignUpRepository(
+                LocalSignUpDataSource(AppDatabase.getDatabase(requireContext()).signUpDao()),
                 RemoteSignUpDataSource(RetrofitClient.webService)
             )
         )

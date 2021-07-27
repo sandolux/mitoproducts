@@ -59,8 +59,9 @@ class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IO
     }
 
     override fun onItemClick(product: ProductEntity) {
+        Log.d(TAG, "onItemClick: $product")
        val action = ProductsFragmentDirections.actionNavProductsToProductDetailFragment(product.id)
-        findNavController().navigate(action)
+       findNavController().navigate(action)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

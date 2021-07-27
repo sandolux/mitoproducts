@@ -16,13 +16,14 @@ import com.osandoval.mitoproducts.data.remote.RetrofitClient
 import com.osandoval.mitoproducts.databinding.FragmentProductDetailBinding
 import com.osandoval.mitoproducts.domain.product.ProductRepository
 import com.osandoval.mitoproducts.ui.products.viewmodel.ProductDetailViewModel
+import com.osandoval.mitoproducts.ui.products.viewmodel.ProductDetailViewModelFactory
 import com.osandoval.mitoproducts.ui.products.viewmodel.ProductViewModelFactory
 
 class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
     private val args by navArgs<ProductDetailFragmentArgs>()
     private lateinit var binding: FragmentProductDetailBinding
     private val viewModel by viewModels<ProductDetailViewModel> {
-        ProductViewModelFactory(
+        ProductDetailViewModelFactory(
             ProductRepository(
                 RemoteProductDataSource(RetrofitClient.webService),
                 LocalProductDataSource(AppDatabase.getDatabase(requireContext()).productDao())
