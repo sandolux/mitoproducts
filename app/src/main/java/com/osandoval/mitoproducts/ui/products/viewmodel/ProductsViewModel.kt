@@ -8,7 +8,7 @@ import com.osandoval.mitoproducts.domain.product.IProductRepository
 import com.osandoval.mitoproducts.domain.product.ProductRepository
 import kotlinx.coroutines.Dispatchers
 
-class ProductsViewModel(private val repository: IProductRepository) : ViewModel() {
+class ProductsViewModel(private val repository: ProductRepository) : ViewModel() {
     fun getProducts() = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
@@ -19,8 +19,8 @@ class ProductsViewModel(private val repository: IProductRepository) : ViewModel(
     }
 }
 
-class ProductViewModelFactory(private val repository: IProductRepository) : ViewModelProvider.Factory{
+class ProductViewModelFactory(private val repository: ProductRepository) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-       return modelClass.getConstructor(IProductRepository::class.java).newInstance(repository)
+       return modelClass.getConstructor(ProductRepository::class.java).newInstance(repository)
     }
 }

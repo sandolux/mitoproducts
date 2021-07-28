@@ -18,6 +18,7 @@ import com.osandoval.mitoproducts.domain.product.ProductRepository
 import com.osandoval.mitoproducts.ui.products.viewmodel.ProductDetailViewModel
 import com.osandoval.mitoproducts.ui.products.viewmodel.ProductDetailViewModelFactory
 import com.osandoval.mitoproducts.ui.products.viewmodel.ProductViewModelFactory
+import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
     private val args by navArgs<ProductDetailFragmentArgs>()
@@ -27,10 +28,11 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             ProductRepository(
                 RemoteProductDataSource(RetrofitClient.webService),
                 LocalProductDataSource(AppDatabase.getDatabase(requireContext()).productDao())
-            )
+            ),
+            SharedPreferences(requireContext())
         )
     }
-    private val TAG = "meh"
+    private val TAG = "MITOPRODUCT"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

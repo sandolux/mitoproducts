@@ -13,7 +13,8 @@ import java.lang.Exception
 
 class RegisterViewModel(private val repository: ISignUpRepository) : ViewModel(){
     fun signUp(username: String, name: String, lastname: String, address:String,
-               phone: String, email: String, password: String, confirmation: String) = liveData(viewModelScope.coroutineContext + Dispatchers.Main){
+               phone: String, email: String, password: String, confirmation: String)
+        = liveData(viewModelScope.coroutineContext + Dispatchers.Main){
 
         emit(Resource.Loading())
 

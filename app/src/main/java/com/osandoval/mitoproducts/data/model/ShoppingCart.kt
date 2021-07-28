@@ -13,7 +13,8 @@ data class ShoppingCartEntity(
     @ColumnInfo(name="description") val description: String="",
     @ColumnInfo(name="price") val price: Float=0F,
     @ColumnInfo(name="url_image") val urlImage: String="",
-    @ColumnInfo(name="status") val status:Boolean=false
+    @ColumnInfo(name="status") val status:Boolean=false,
+    @ColumnInfo(name="userUID") var userUID:Long?=0
 )
 
 fun List<ShoppingCartEntity>.toOrderDetailList(orderUid: String="") : List<OrderDetailEntity> {

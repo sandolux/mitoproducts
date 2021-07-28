@@ -9,16 +9,22 @@ import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.data.model.OrderDetailEntity
 import com.osandoval.mitoproducts.data.model.OrderEntity
 import com.osandoval.mitoproducts.data.model.toOrderDetailList
+import com.osandoval.mitoproducts.domain.shoppingcart.IShoppingCartRepository
 import com.osandoval.mitoproducts.domain.shoppingcart.ShoppingCartRepository
+import com.osandoval.mitoproducts.utils.sharedpreferences.ISharedPreferences
+import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 import java.util.*
 
-class ShoppingCartViewModel(private val repository: ShoppingCartRepository) : ViewModel() {
+class ShoppingCartViewModel(private val repository: IShoppingCartRepository, private val sharedPreferences: ISharedPreferences)
+    : ViewModel() {
     fun getShoppingCart() = liveData(viewModelScope.coroutineContext + Dispatchers.Main){
         emit(Resource.Loading())
         try {
-            emit(Resource.Success(repository.getShoppingCart()))
+            val user = sharedPreferences.getUser()
+            Log.d("meh", "getShoppingCart SC VIEMODEL: $user")
+            emit(Resource.Success(repository.getShoppingCart(user!!.uid!!.toLong())))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }
@@ -33,31 +39,26 @@ class ShoppingCartViewModel(private val repository: ShoppingCartRepository) : Vi
         }
     }
 
-    fun wipeShoppingCart() = liveData(Dispatchers.IO){
-        emit(Resource.Loading())
-        try {
-            emit(Resource.Success(repository.wipeShoppingCart()))
-        }catch (e: Exception){
-            emit(Resource.Failure(e))
-        }
-    }
-
     fun insertOrders() = liveData(viewModelScope.coroutineContext + Dispatchers.Main){
         emit(Resource.Loading())
         try {
+            val userUID = sharedPreferences.getUser()!!.uid?.toLong()
             val orderUid= UUID.randomUUID().toString()
-            repository.insertOrders( repository.getShoppingCart().toOrderDetailList(orderUid), orderUid )
-            repository.wipeShoppingCart()
+            repository.insertOrders(repository.getShoppingCart(userUID!!).toOrderDetailList(orderUid), orderUid, userUID)
+            repository.wipeShoppingCart(userUID)
             emit(Resource.Success(true))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }
     }
-
 }
 
-class ShoppingCartViewModelFactory(private val repository: ShoppingCartRepository) : ViewModelProvider.Factory{
+class ShoppingCartViewModelFactory(private val repository: ShoppingCartRepository, private val sharedPreferences: SharedPreferences)
+    : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(ShoppingCartRepository::class.java).newInstance(repository)
+        return modelClass.getConstructor(
+            ShoppingCartRepository::class.java,
+            SharedPreferences::class.java
+        ).newInstance(repository, sharedPreferences)
     }
 }

@@ -69,16 +69,22 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             viewModel.validateUser(username, password).observe(viewLifecycleOwner, {result ->
                 when(result) {
                     is Resource.Loading -> {
-                        Log.d(TAG, "onViewCreated: LOADING...")
+                        Log.d(TAG, "onViewCreated LoginFragment: LOADING...")
                     }
                     is Resource.Success -> {
                         when(result.data) {
-                            true -> { goToMainActivity() }
-                            false ->{ Log.d(TAG, "onViewCreated: error de credenciales") }
+                            true -> {
+                                binding.textInputUsername.setText("")
+                                binding.textInputPassword.setText("")
+                                goToMainActivity()
+                            }
+                            false ->{
+                                Log.d(TAG, "onViewCreated: error de credenciales")
+                            }
                         }
                     }
                     is Resource.Failure -> {
-                        Log.d(TAG, "onViewCreated: ${result.exception}")
+                        Log.d(TAG, "onViewCreated LoginFragment: ${result.exception}")
                     }
                 }
             })

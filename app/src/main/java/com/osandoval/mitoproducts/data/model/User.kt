@@ -32,6 +32,13 @@ data class UserSignUp (
     val password: String,
 )
 
+data class UserSession(
+    val uid: String?="",
+    val user: String?="",
+    val fullName: String?="",
+    val email: String?=""
+)
+
 @Entity
 data class UserEntity (
     @PrimaryKey

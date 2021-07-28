@@ -10,16 +10,14 @@ import com.osandoval.mitoproducts.data.model.ShoppingCartEntity
 
 @Dao
 interface IShoppingCartDao {
-    @Query("SELECT * FROM ShoppingCartEntity")
-    suspend fun getShoppingCart() : MutableList<ShoppingCartEntity>
-
-    //suspend fun getLShoppingCart() : LiveData<MutableList<ShoppingCartEntity>>
+    @Query("SELECT * FROM ShoppingCartEntity WHERE userUID = :userUID")
+    suspend fun getShoppingCart(userUID: Long) : MutableList<ShoppingCartEntity>
 
     @Query("DELETE FROM ShoppingCartEntity WHERE uid= :uid")
     suspend fun deleteItem(uid:Int)
 
-    @Query("DELETE FROM ShoppingCartEntity")
-    suspend fun wipeShoppingCart()
+    @Query("DELETE FROM ShoppingCartEntity WHERE userUID = :userUID")
+    suspend fun wipeShoppingCart(userUID: Long)
 
     @Insert
     suspend fun createOrder(orders : OrderEntity)
@@ -27,8 +25,3 @@ interface IShoppingCartDao {
     @Insert
     suspend fun insertOrders(orders : List<OrderDetailEntity>)
 }
-
-/*
-* @Insert
-     public void insertWithFriends(User user, List<User> friends);
-* */

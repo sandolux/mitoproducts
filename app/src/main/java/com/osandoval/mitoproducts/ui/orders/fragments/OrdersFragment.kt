@@ -20,15 +20,17 @@ import com.osandoval.mitoproducts.domain.order.OrderRepository
 import com.osandoval.mitoproducts.ui.orders.adapter.OrdersAdapter
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderViewModel
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderViewModelFactory
+import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItemClickListener {
-    private val TAG ="Meh"
+    private val TAG = "MITOPRODUCT"
     private lateinit var binding : FragmentOrdersBinding
     private val viewModel by viewModels<OrderViewModel> {
         OrderViewModelFactory(
             OrderRepository(
                 LocalOrderDataSource(AppDatabase.getDatabase(requireContext()).orderDao())
-            )
+            ),
+            SharedPreferences(requireContext())
         )
     }
 
@@ -54,11 +56,11 @@ class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItem
     }
 
     override fun onItemClick(orderEntity: OrderEntity) {
+        //TODO: IMPLEMENTAR MODAL CON INFORMACIÓN DEL PEDIDO
         Log.d(TAG, "onItemClick: $orderEntity")
     }
 
     override fun onNextButtonClick(uid: String) {
-        Log.d(TAG, "onNextButtonClick: $uid")
         val action = OrdersFragmentDirections.actionNavOrdersToOrderDetailFragment(uid)
         findNavController().navigate(action)
     }

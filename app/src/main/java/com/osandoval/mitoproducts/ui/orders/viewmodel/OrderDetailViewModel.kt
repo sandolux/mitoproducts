@@ -15,9 +15,6 @@ class OrderDetailViewModel(private val repository: IOrderRepository) : ViewModel
     fun getOrdersDetail(uid: String="") = liveData(viewModelScope.coroutineContext + Dispatchers.Main){
         emit(Resource.Loading())
         try {
-          //  Log.d("meh", "getOrdersDetail: $uid")
-//            val list = repository.getOrdersDetail(uid)
-//            Log.d("meh", "getOrdersDetail: $list")
             emit(Resource.Success(repository.getOrdersDetail(uid)))
         }catch (e: Exception){
             emit(Resource.Failure(e))

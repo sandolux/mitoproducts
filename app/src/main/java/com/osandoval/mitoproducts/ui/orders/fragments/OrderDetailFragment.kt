@@ -21,7 +21,7 @@ import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderDetailViewModelFactor
 import com.osandoval.mitoproducts.ui.products.adapter.ProductAdapter
 
 class OrderDetailFragment : Fragment(R.layout.fragment_order_detail), ProductAdapter.IOnItemClickListener {
-    private val TAG ="Meh"
+    private val TAG = "MITOPRODUCT"
     private val args by navArgs<OrderDetailFragmentArgs>()
     private lateinit var binding: FragmentOrderDetailBinding
 
@@ -46,7 +46,6 @@ class OrderDetailFragment : Fragment(R.layout.fragment_order_detail), ProductAda
                 is Resource.Success -> {
                     binding.recyclerViewProducts.layoutManager = GridLayoutManager(context,2)
                     binding.recyclerViewProducts.adapter = ProductAdapter(result.data, this@OrderDetailFragment)
-                   // Log.d(TAG, "onViewCreated: ${result.data}")
                 }
                 is Resource.Failure -> {
                     Log.d(TAG, "onViewCreated: ${result.exception}")
@@ -56,6 +55,7 @@ class OrderDetailFragment : Fragment(R.layout.fragment_order_detail), ProductAda
     }
 
     override fun onItemClick(product: ProductEntity) {
+        //TODO(): IMPLEMENTAR MODAL CON INFORMACIÓN DEL PRODUCTO
         Log.d(TAG, "onItemClick: $product")
     }
 }

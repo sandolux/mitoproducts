@@ -53,7 +53,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         Log.d(TAG, "onViewCreated: LOADING...")
                     }
                     is Resource.Success -> {
-                        Log.d(TAG, "setRegisterButtonListener: $result")
                         goToSignIn(username,password)
                     }
                     is Resource.Failure -> {

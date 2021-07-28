@@ -11,7 +11,6 @@ import kotlinx.coroutines.withContext
 class RemoteSignUpDataSource(private val source: IWebService) {
     suspend fun signUp(user: UserSignUp) : UserResponse {
         var result: UserResponse
-        Log.d("meh", "signUp: $user")
         withContext(Dispatchers.IO){
             result = source.signUp(user)
         }

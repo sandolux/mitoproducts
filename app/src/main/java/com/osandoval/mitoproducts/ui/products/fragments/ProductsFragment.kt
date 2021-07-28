@@ -25,7 +25,7 @@ import com.osandoval.mitoproducts.ui.products.viewmodel.ProductsViewModel
 
 
 class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IOnItemClickListener {
-    private val TAG ="Meh"
+    private val TAG = "MITOPRODUCT"
     private lateinit var binding: FragmentProductsBinding
     private val viewModel by viewModels<ProductsViewModel> {
         ProductViewModelFactory(
@@ -52,14 +52,13 @@ class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IO
                     binding.recyclerViewProducts.adapter = ProductAdapter(result.data, this@ProductsFragment)
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onViewCreated: ${result.exception}")
+                    Log.d(TAG, "onViewCreated ProductsFragment: ${result.exception}")
                 }
             }
         })
     }
 
     override fun onItemClick(product: ProductEntity) {
-        Log.d(TAG, "onItemClick: $product")
        val action = ProductsFragmentDirections.actionNavProductsToProductDetailFragment(product.id)
        findNavController().navigate(action)
     }

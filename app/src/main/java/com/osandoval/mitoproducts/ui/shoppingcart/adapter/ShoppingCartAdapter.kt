@@ -20,9 +20,7 @@ class ShoppingCartAdapter(private var list: MutableList<ShoppingCartEntity>, val
         fun onItemClick(shoppingCart : ShoppingCartEntity)
         fun onDeleteClick(uid: Int, position: Int)
     }
-    init {
-        Log.d("meh", ": init se ejecutó ")
-    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val viewBinding = FragmentShoppingCartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = ShoppingCartViewHolder(viewBinding, parent.context)

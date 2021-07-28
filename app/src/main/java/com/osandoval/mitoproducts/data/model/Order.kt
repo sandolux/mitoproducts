@@ -8,10 +8,9 @@ import androidx.room.PrimaryKey
 data class OrderEntity(
     @PrimaryKey
     @ColumnInfo(name="uid" ) val uid: String="",
-
+    @ColumnInfo(name="userUid") val userId: Long=0
 )
 
-//@Entity(primaryKeys = ["orderUid","productUid"])
 @Entity
 data class OrderDetailEntity(
     @PrimaryKey(autoGenerate = true)

@@ -17,6 +17,7 @@ import com.osandoval.mitoproducts.domain.shoppingcart.ShoppingCartRepository
 import com.osandoval.mitoproducts.ui.shoppingcart.adapter.ShoppingCartAdapter
 import com.osandoval.mitoproducts.ui.shoppingcart.viewmodel.ShoppingCartViewModel
 import com.osandoval.mitoproducts.ui.shoppingcart.viewmodel.ShoppingCartViewModelFactory
+import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), ShoppingCartAdapter.IOnProductClickListener {
     private lateinit var binding : FragmentShoppingCartBinding
@@ -24,10 +25,13 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
 
     private val viewModel by viewModels<ShoppingCartViewModel>{
         ShoppingCartViewModelFactory(
-            ShoppingCartRepository(LocalShoppingCartDataSource(AppDatabase.getDatabase(requireContext()).shoppingCartDao()))
+            ShoppingCartRepository(
+                LocalShoppingCartDataSource(AppDatabase.getDatabase(requireContext()).shoppingCartDao())
+            ),
+            SharedPreferences(requireContext())
         )
     }
-    private val TAG ="Meh"
+    private val TAG = "MITOPRODUCT"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -64,7 +68,7 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
                         Log.d(TAG, "onViewCreated: LOADING...")
                     }
                     is Resource.Success -> {
-                        //Log.d(TAG, "setButtonCreateOrderListener: El pedido fue creado ${result.data}  ")
+                        Log.d(TAG, "setButtonCreateOrderListener: El pedido fue creado ${result.data} ")
                         findNavController().navigate(ShoppingCartFragmentDirections.actionNavShoppingCartToNavOrders())
                     }
                     is Resource.Failure -> {

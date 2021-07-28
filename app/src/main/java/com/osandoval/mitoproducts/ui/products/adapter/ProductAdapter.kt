@@ -33,7 +33,6 @@ class ProductAdapter(private val list: List<ProductEntity>, private val itemClic
         when(holder){
             is ProductViewHolder -> holder.bind(list[position])
         }
-
     }
 
     override fun getItemCount(): Int = list.size
@@ -45,7 +44,6 @@ class ProductAdapter(private val list: List<ProductEntity>, private val itemClic
            Glide.with(context).load(item.urlImage).centerCrop().into(binding.imageProduct)
            binding.textViewName.text = item.name
         }
-
     }
 
 }

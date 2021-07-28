@@ -1,7 +1,9 @@
 package com.osandoval.mitoproducts.utils.sharedpreferences
 
+import com.osandoval.mitoproducts.data.model.UserSession
+
 interface ISharedPreferences {
-    suspend fun saveUser(username: String)
-    suspend fun getUser() : String?
+    suspend fun saveUser(user: UserSession)
+    suspend fun getUser() : UserSession?
     fun wipeData()
 }

@@ -27,6 +27,6 @@ fun Product.toProductEntity(): ProductEntity = ProductEntity(
     this.id, this.name, this.description, this.price, this.urlImage, this.status
 )
 
-fun ProductEntity.toShoppingCartEntity(): ShoppingCartEntity = ShoppingCartEntity(
-    0, this.id, this.name, this.description, this.price, this.urlImage, this.status
+fun ProductEntity.toShoppingCartEntity(userUID : Long): ShoppingCartEntity = ShoppingCartEntity(
+    0, this.id, this.name, this.description, this.price, this.urlImage, this.status, userUID
 )
