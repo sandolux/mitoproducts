@@ -12,18 +12,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.recyclerview.widget.GridLayoutManager
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
 import com.osandoval.mitoproducts.databinding.ActivityMainBinding
 import com.osandoval.mitoproducts.ui.main.viewmodel.MainViewModel
 import com.osandoval.mitoproducts.ui.main.viewmodel.MainViewModelFactory
-import com.osandoval.mitoproducts.ui.products.adapter.ProductAdapter
 import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = "MITOPRODUCT"
+    private val TAG = "APP_MITOPRODUCT"
+    private val ORIGIN = "[MAIN_ACTIVITY]"
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private val viewmodel by viewModels<MainViewModel>{
@@ -58,14 +56,14 @@ class MainActivity : AppCompatActivity() {
         viewmodel.getUser().observe(this, { result->
             when(result) {
                 is Resource.Loading -> {
-                    Log.d(TAG, "onViewCreated: LOADING...")
+                    Log.d(TAG, "$ORIGIN onViewCreated: LOADING...")
                 }
                 is Resource.Success -> {
                     setFullName(result.data!!.fullName)
                     setEmail(result.data.email)
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onViewCreated: ${ result.exception }")
+                    Log.d(TAG, "$ORIGIN onViewCreated $TAG: ${ result.exception }")
                 }
             }
         })

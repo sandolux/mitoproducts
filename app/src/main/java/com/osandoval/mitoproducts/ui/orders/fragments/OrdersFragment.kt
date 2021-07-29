@@ -23,7 +23,8 @@ import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderViewModelFactory
 import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItemClickListener {
-    private val TAG = "MITOPRODUCT"
+    private val TAG = "APP_MITOPRODUCT"
+    private val ORIGIN = "[ORDERS_FRAGMENT]"
     private lateinit var binding : FragmentOrdersBinding
     private val viewModel by viewModels<OrderViewModel> {
         OrderViewModelFactory(
@@ -42,14 +43,14 @@ class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItem
         viewModel.getOrders().observe(viewLifecycleOwner, { result->
             when(result) {
                 is Resource.Loading -> {
-                    Log.d(TAG, "onViewCreated: LOADING...")
+                    Log.d(TAG, "$ORIGIN onViewCreated: LOADING...")
                 }
                 is Resource.Success -> {
                     binding.recyclerViewOrders.addItemDecoration(DividerItemDecoration(context,1))
                     binding.recyclerViewOrders.adapter = OrdersAdapter(result.data, this@OrdersFragment)
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onViewCreated: ${result.exception}")
+                    Log.d(TAG, "$ORIGIN onViewCreated: ${result.exception}")
                 }
             }
         })
@@ -57,7 +58,7 @@ class OrdersFragment : Fragment(R.layout.fragment_orders), OrdersAdapter.IOnItem
 
     override fun onItemClick(orderEntity: OrderEntity) {
         //TODO: IMPLEMENTAR MODAL CON INFORMACIÓN DEL PEDIDO
-        Log.d(TAG, "onItemClick: $orderEntity")
+        Log.d(TAG, "$ORIGIN onItemClick: $orderEntity")
     }
 
     override fun onNextButtonClick(uid: String) {

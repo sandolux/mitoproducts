@@ -1,7 +1,6 @@
 package com.osandoval.mitoproducts.ui.orders.adapter
 
 import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

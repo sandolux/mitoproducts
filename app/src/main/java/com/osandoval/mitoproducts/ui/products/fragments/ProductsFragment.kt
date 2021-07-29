@@ -25,7 +25,9 @@ import com.osandoval.mitoproducts.ui.products.viewmodel.ProductsViewModel
 
 
 class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IOnItemClickListener {
-    private val TAG = "MITOPRODUCT"
+    private val TAG = "APP_MITOPRODUCT"
+    private val ORIGIN = "[PRODUCTS_FRAGMENT]"
+
     private lateinit var binding: FragmentProductsBinding
     private val viewModel by viewModels<ProductsViewModel> {
         ProductViewModelFactory(
@@ -45,14 +47,14 @@ class ProductsFragment : Fragment(R.layout.fragment_products), ProductAdapter.IO
         viewModel.getProducts().observe(viewLifecycleOwner, { result->
             when(result) {
                 is Resource.Loading -> {
-                    Log.d(TAG, "onViewCreated: LOADING...")
+                    Log.d(TAG, "$ORIGIN onViewCreated: LOADING...")
                 }
                 is Resource.Success -> {
                     binding.recyclerViewProducts.layoutManager = GridLayoutManager(context,2)
                     binding.recyclerViewProducts.adapter = ProductAdapter(result.data, this@ProductsFragment)
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onViewCreated ProductsFragment: ${result.exception}")
+                    Log.d(TAG, "$ORIGIN onViewCreated ProductsFragment: ${result.exception}")
                 }
             }
         })

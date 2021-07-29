@@ -1,29 +1,23 @@
 package com.osandoval.mitoproducts.ui.shoppingcart.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.osandoval.mitoproducts.core.Resource
-import com.osandoval.mitoproducts.data.model.OrderDetailEntity
-import com.osandoval.mitoproducts.data.model.OrderEntity
 import com.osandoval.mitoproducts.data.model.toOrderDetailList
-import com.osandoval.mitoproducts.domain.shoppingcart.IShoppingCartRepository
 import com.osandoval.mitoproducts.domain.shoppingcart.ShoppingCartRepository
-import com.osandoval.mitoproducts.utils.sharedpreferences.ISharedPreferences
 import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 import java.util.*
 
-class ShoppingCartViewModel(private val repository: IShoppingCartRepository, private val sharedPreferences: ISharedPreferences)
+class ShoppingCartViewModel(private val repository: ShoppingCartRepository, private val sharedPreferences: SharedPreferences)
     : ViewModel() {
     fun getShoppingCart() = liveData(viewModelScope.coroutineContext + Dispatchers.Main){
         emit(Resource.Loading())
         try {
             val user = sharedPreferences.getUser()
-            Log.d("meh", "getShoppingCart SC VIEMODEL: $user")
             emit(Resource.Success(repository.getShoppingCart(user!!.uid!!.toLong())))
         }catch (e: Exception){
             emit(Resource.Failure(e))

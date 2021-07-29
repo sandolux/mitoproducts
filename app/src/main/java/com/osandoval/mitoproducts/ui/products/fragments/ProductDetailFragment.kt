@@ -17,10 +17,12 @@ import com.osandoval.mitoproducts.databinding.FragmentProductDetailBinding
 import com.osandoval.mitoproducts.domain.product.ProductRepository
 import com.osandoval.mitoproducts.ui.products.viewmodel.ProductDetailViewModel
 import com.osandoval.mitoproducts.ui.products.viewmodel.ProductDetailViewModelFactory
-import com.osandoval.mitoproducts.ui.products.viewmodel.ProductViewModelFactory
 import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
+    private val TAG = "MITOPRODUCT"
+    private val ORIGIN = "[PRODUCT_DETAIL_FRAGMENT]"
+
     private val args by navArgs<ProductDetailFragmentArgs>()
     private lateinit var binding: FragmentProductDetailBinding
     private val viewModel by viewModels<ProductDetailViewModel> {
@@ -32,7 +34,6 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             SharedPreferences(requireContext())
         )
     }
-    private val TAG = "MITOPRODUCT"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +43,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
         viewModel.getProduct(args.id).observe(viewLifecycleOwner, {result->
             when(result){
                 is Resource.Loading -> {
-                    Log.d(TAG, "onViewCreated: LOADING")
+                    Log.d(TAG, "$ORIGIN onViewCreated: LOADING")
                 }
                 is Resource.Success -> {
                     Glide.with(this@ProductDetailFragment,).load(result.data.urlImage).centerCrop().into(binding.imageProduct)
@@ -51,7 +52,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
                     binding.textViewDescription.text = result.data.description
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onViewCreated: ${result.exception}")
+                    Log.d(TAG, "$ORIGIN onViewCreated: ${result.exception}")
                 }
             }
         })
@@ -64,13 +65,13 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
             viewModel.addShoppingCart(args.id).observe(viewLifecycleOwner, {result->
                 when(result){
                     is Resource.Loading -> {
-                        Log.d(TAG, "onViewCreated: LOADING")
+                        Log.d(TAG, "$ORIGIN  onViewCreated: LOADING")
                     }
                     is Resource.Success -> {
-                        Log.d(TAG, "setListeners: ${result.data}")
+                        Log.d(TAG, "$ORIGIN setListeners: ${result.data}")
                     }
                     is Resource.Failure -> {
-                        Log.d(TAG, "onViewCreated: ${result.exception}")
+                        Log.d(TAG, "$ORIGIN  onViewCreated: ${result.exception}")
                     }
                 }
             })

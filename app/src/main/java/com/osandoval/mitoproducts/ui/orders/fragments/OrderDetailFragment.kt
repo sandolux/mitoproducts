@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.osandoval.mitoproducts.R
 import com.osandoval.mitoproducts.core.Resource
@@ -15,13 +14,13 @@ import com.osandoval.mitoproducts.data.local.order.LocalOrderDataSource
 import com.osandoval.mitoproducts.data.model.ProductEntity
 import com.osandoval.mitoproducts.databinding.FragmentOrderDetailBinding
 import com.osandoval.mitoproducts.domain.order.OrderRepository
-import com.osandoval.mitoproducts.ui.orders.adapter.OrdersAdapter
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderDetailViewModel
 import com.osandoval.mitoproducts.ui.orders.viewmodel.OrderDetailViewModelFactory
 import com.osandoval.mitoproducts.ui.products.adapter.ProductAdapter
 
 class OrderDetailFragment : Fragment(R.layout.fragment_order_detail), ProductAdapter.IOnItemClickListener {
-    private val TAG = "MITOPRODUCT"
+    private val TAG = "APP_MITOPRODUCT"
+    private val ORIGIN = "[ORDER_DETAIL_FRAGMENT]"
     private val args by navArgs<OrderDetailFragmentArgs>()
     private lateinit var binding: FragmentOrderDetailBinding
 
@@ -41,14 +40,14 @@ class OrderDetailFragment : Fragment(R.layout.fragment_order_detail), ProductAda
         viewModel.getOrdersDetail(args.uid).observe(viewLifecycleOwner, { result->
             when(result) {
                 is Resource.Loading -> {
-                    Log.d(TAG, "onViewCreated: LOADING...")
+                    Log.d(TAG, "$ORIGIN onViewCreated: LOADING...")
                 }
                 is Resource.Success -> {
                     binding.recyclerViewProducts.layoutManager = GridLayoutManager(context,2)
                     binding.recyclerViewProducts.adapter = ProductAdapter(result.data, this@OrderDetailFragment)
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onViewCreated: ${result.exception}")
+                    Log.d(TAG, "$ORIGIN onViewCreated: ${result.exception}")
                 }
             }
         })
@@ -56,6 +55,6 @@ class OrderDetailFragment : Fragment(R.layout.fragment_order_detail), ProductAda
 
     override fun onItemClick(product: ProductEntity) {
         //TODO(): IMPLEMENTAR MODAL CON INFORMACIÓN DEL PRODUCTO
-        Log.d(TAG, "onItemClick: $product")
+        Log.d(TAG, "$ORIGIN onItemClick: $product")
     }
 }

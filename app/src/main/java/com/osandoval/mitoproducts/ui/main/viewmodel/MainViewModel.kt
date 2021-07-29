@@ -4,10 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.osandoval.mitoproducts.core.Resource
-import com.osandoval.mitoproducts.utils.sharedpreferences.ISharedPreferences
 import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 import kotlinx.coroutines.Dispatchers
-import okhttp3.Dispatcher
 
 class MainViewModel(private val sharedPreferences: SharedPreferences) : ViewModel() {
 

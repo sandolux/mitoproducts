@@ -1,6 +1,5 @@
 package com.osandoval.mitoproducts.ui.authentication.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData

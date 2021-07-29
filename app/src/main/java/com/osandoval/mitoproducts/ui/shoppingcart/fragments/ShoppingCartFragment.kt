@@ -20,6 +20,9 @@ import com.osandoval.mitoproducts.ui.shoppingcart.viewmodel.ShoppingCartViewMode
 import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), ShoppingCartAdapter.IOnProductClickListener {
+    private val TAG = "APP_MITOPRODUCT"
+    private val ORIGIN = "[SHOPPING_CART_FRAGMENT]"
+
     private lateinit var binding : FragmentShoppingCartBinding
     private lateinit var adapter : ShoppingCartAdapter
 
@@ -31,7 +34,7 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
             SharedPreferences(requireContext())
         )
     }
-    private val TAG = "MITOPRODUCT"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,7 +49,7 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
         viewModel.getShoppingCart().observe(viewLifecycleOwner, {result ->
             when(result) {
                 is Resource.Loading -> {
-                    Log.d(TAG, "onViewCreated: LOADING...")
+                    Log.d(TAG, "$ORIGIN onViewCreated: LOADING...")
                 }
                 is Resource.Success -> {
                     adapter = ShoppingCartAdapter(result.data, this@ShoppingCartFragment)
@@ -54,7 +57,7 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
                     binding.recyclerViewShoppingCart.adapter = adapter
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onViewCreated: ${result.exception}")
+                    Log.d(TAG, "$ORIGIN onViewCreated: ${result.exception}")
                 }
             }
         })
@@ -65,14 +68,14 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
             viewModel.insertOrders().observe(viewLifecycleOwner, {result ->
                 when(result) {
                     is Resource.Loading -> {
-                        Log.d(TAG, "onViewCreated: LOADING...")
+                        Log.d(TAG, "$ORIGIN onViewCreated: LOADING...")
                     }
                     is Resource.Success -> {
-                        Log.d(TAG, "setButtonCreateOrderListener: El pedido fue creado ${result.data} ")
+                        Log.d(TAG, "$ORIGIN setButtonCreateOrderListener: El pedido fue creado ${result.data} ")
                         findNavController().navigate(ShoppingCartFragmentDirections.actionNavShoppingCartToNavOrders())
                     }
                     is Resource.Failure -> {
-                        Log.d(TAG, "onViewCreated: ${result.exception}")
+                        Log.d(TAG, "$ORIGIN onViewCreated: ${result.exception}")
                     }
                 }
             })
@@ -80,21 +83,22 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart), Shopping
     }
 
     override fun onItemClick(shoppingCart: ShoppingCartEntity) {
-        Log.d(TAG, "onItemClick: $shoppingCart")
+        //TODO: IMPLEMENTAR MODAL CON INFORMACIÓN DEL ITEM SELECCIONADO
+        Log.d(TAG, "$ORIGIN onItemClick: $shoppingCart")
     }
 
     override fun onDeleteClick(uid: Int, position : Int) {
         viewModel.deleteItem(uid).observe(viewLifecycleOwner, { result ->
             when(result) {
                 is Resource.Loading -> {
-                    Log.d(TAG, "onDeleteClick: LOADING...")
+                    Log.d(TAG, "$ORIGIN onDeleteClick: LOADING...")
                 }
                 is Resource.Success -> {
-                    Log.d(TAG, "onDeleteClick: ELIMINADO $uid")
+                    Log.d(TAG, "$ORIGIN onDeleteClick: ELIMINADO $uid")
                     adapter.removeAtPosition(position)
                 }
                 is Resource.Failure -> {
-                    Log.d(TAG, "onDeleteClick: ${result.exception}")
+                    Log.d(TAG, "$ORIGIN onDeleteClick: ${result.exception}")
                 }
             }
         })

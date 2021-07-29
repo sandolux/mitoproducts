@@ -23,7 +23,6 @@ class LocalShoppingCartDataSource(private val source: IShoppingCartDao) {
             source.createOrder(OrderEntity(orderUid,userUID))
             source.insertOrders(orders)
         }
-
     }
 
 }

@@ -165,26 +165,6 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--  CONFIRM PASSWORD      -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_layout_password_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:background="@color/white"
-                android:hint="@string/str_label_password_confirm"
-                app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_outline_vpn_key_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/text_input_password_confirm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:inputType="textNoSuggestions|textPassword"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <!--  BUTTONS          -->
             <Button
                 android:id="@+id/button_signUp"

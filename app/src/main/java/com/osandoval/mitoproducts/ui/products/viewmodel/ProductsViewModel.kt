@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.osandoval.mitoproducts.core.Resource
-import com.osandoval.mitoproducts.domain.product.IProductRepository
 import com.osandoval.mitoproducts.domain.product.ProductRepository
 import kotlinx.coroutines.Dispatchers
 
