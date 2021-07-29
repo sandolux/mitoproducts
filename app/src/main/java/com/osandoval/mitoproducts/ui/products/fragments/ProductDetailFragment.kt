@@ -3,6 +3,7 @@ package com.osandoval.mitoproducts.ui.products.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -20,7 +21,7 @@ import com.osandoval.mitoproducts.ui.products.viewmodel.ProductDetailViewModelFa
 import com.osandoval.mitoproducts.utils.sharedpreferences.SharedPreferences
 
 class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
-    private val TAG = "MITOPRODUCT"
+    private val TAG = "APP_MITOPRODUCT"
     private val ORIGIN = "[PRODUCT_DETAIL_FRAGMENT]"
 
     private val args by navArgs<ProductDetailFragmentArgs>()
@@ -68,7 +69,7 @@ class ProductDetailFragment : Fragment(R.layout.fragment_product_detail) {
                         Log.d(TAG, "$ORIGIN  onViewCreated: LOADING")
                     }
                     is Resource.Success -> {
-                        Log.d(TAG, "$ORIGIN setListeners: ${result.data}")
+                        Toast.makeText(context,"Se agregó al carro", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Failure -> {
                         Log.d(TAG, "$ORIGIN  onViewCreated: ${result.exception}")
